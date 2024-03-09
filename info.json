@@ -1,0 +1,12 @@
+{
+  "commit": {
+    "commit": "32ddcdfe9f8221643a6b79985479317c62a3cbe4",
+    "author": "Marco Sciaini <marco.sciaini@posteo.net>",
+    "time": "2022-10-11 05:06:25",
+    "files": 1,
+    "merge": true,
+    "message": "Merge pull request #105 from ropensci/codemeta\n\nUpdate codemeta workflow"
+  },
+  "repo": "https://github.com/ropensci/NLMR",
+  "pkg": "NLMR"
+}

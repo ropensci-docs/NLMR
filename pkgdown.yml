@@ -1,0 +1,14 @@
+pandoc: 2.16.2
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  nlm_software_heritage: nlm_software_heritage.html
+  overview_tips: overview_tips.html
+  publication_record: publication_record.html
+  visualize_nlms: visualize_nlms.html
+  getstarted: getstarted.html
+last_built: 2024-03-09T07:43Z
+urls:
+  reference: https://docs.ropensci.org/NLMR/reference
+  article: https://docs.ropensci.org/NLMR/articles
+
