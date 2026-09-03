@@ -1,0 +1,13 @@
+{
+  "commit": {
+    "commit": "7d5434d6c50b571d95c742f6e73f678c3f26636f",
+    "author": "jn <tupiszakaczki@gmail.com>",
+    "time": "2026-07-05T11:07:37Z",
+    "files": 4,
+    "merge": false,
+    "message": "improves a message\n"
+  },
+  "repo": "https://github.com/ropensci/NLMR",
+  "pkg": "NLMR",
+  "time": "2026-09-03T10:30:24Z"
+}

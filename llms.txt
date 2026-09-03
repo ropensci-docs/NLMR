@@ -1,0 +1,134 @@
+# NLMR
+
+**NLMR** is an `R` package for simulating **n**eutral **l**andscape
+**m**odels (NLM). Designed to be a generic framework like
+[NLMpy](https://pypi.org/project/nlmpy/), it leverages the ability to
+simulate the most common NLM that are described in the ecological
+literature. **NLMR** builds on the advantages of the **raster** package
+and returns all simulation as `RasterLayer` objects, thus ensuring a
+direct compatibility to common GIS tasks and a flexible and simple
+usage. Furthermore, it simulates NLMs within a self-contained,
+reproducible framework.
+
+## Installation
+
+NLMR is not available on CRAN at the moment (see \#95). The only way to
+install NLMR at the moment is:
+
+``` r
+
+# install.packages("remotes")
+remotes::install_github("ropensci/NLMR")
+```
+
+## Example
+
+Each neutral landscape models is simulated with a single function (all
+starting with `nlm_`) in `NLMR`, e.g.:
+
+``` r
+
+random_cluster <- NLMR::nlm_randomcluster(nrow = 100,
+                                      ncol = 100,
+                                      p    = 0.5,
+                                      ai   = c(0.3, 0.6, 0.1),
+                                      rescale = FALSE)
+
+random_curdling <- NLMR::nlm_curds(curds = c(0.5, 0.3, 0.6),
+                              recursion_steps = c(32, 6, 2))
+
+
+midpoint_displacememt <- NLMR::nlm_mpd(ncol = 100,
+                                 nrow = 100,
+                                 roughness = 0.61)
+```
+
+## Overview
+
+**NLMR** supplies 15 NLM algorithms, with several options to simulate
+derivatives of them. The algorithms differ from each other in spatial
+auto-correlation, from no auto-correlation (random NLM) to a constant
+gradient (planar gradients):
+
+| Function | Description | Crossreference | Reference |
+|:---|:---|:---|:---|
+| nlm_curds | Simulates a randomly curdled or wheyed neutral landscape model. Random curdling recursively subdivides the landscape into blocks. At each level of the recursion, a fraction of these blocks is declared as habitat while the remaining stays matrix. When option q is set, it simulates a wheyed curdling model, where previously selected cells that were declared matrix during recursion, can now contain a proportion of habitat cells | Figure 1a,p | O’Neill, Gardner, and Turner (1992); Keitt (2000) |
+| nlm_distancegradient | Simulates a distance gradient neutral landscape model. The gradient is always measured from a rectangle that one has to specify in the function (parameter origin) | Figure 1b | Etherington, Holland, and O’Sullivan (2015) |
+| nlm_edgegradient | Simulates a linear gradient orientated neutral model. The gradient has a specified or random direction that has a central peak, which runs perpendicular to the gradient direction | Figure 1c | Travis and Dytham (2004); Schlather et al. (2015) |
+| nlm_fbm | Simulates neutral landscapes using fractional Brownian motion (fBm). fBm is an extension of Brownian motion in which the amount of spatial autocorrelation between steps is controlled by the Hurst coefficient H | Figure 1d | Schlather et al. (2015) |
+| nlm_gaussianfield | Simulates a spatially correlated random fields (Gaussian random fields) model, where one can control the distance and magnitude of spatial autocorrelation | Figure 1e | Schlather et al. (2015) |
+| nlm_mosaicfield | Simulates a mosaic random field neutral landscape model. The algorithm imitates fault lines by repeatedly bisecting the landscape and lowering the values of cells in one half and increasing the values in the other half. If one sets the parameter infinite to TRUE, the algorithm approaches a fractal pattern | Figure 1f | Schlather et al. (2015) |
+| nlm_neigh | Simulates a neutral landscape model with land cover classes and clustering based on neighbourhood characteristics. The cluster are based on the surrounding cells. If there is a neighbouring cell of the current value/type, the target cell will more likely turned into a cell of that type/value | Figure 1g | Scherer et al. (2016) |
+| nlm_percolation | Simulates a binary neutral landscape model based on percolation theory. The probability for a cell to be assigned habitat is drawn from a uniform distribution | Figure 1h | Gardner et al. (1989) |
+| nlm_planargradient | Simulates a planar gradient neutral landscape model. The gradient is sloping in a specified or (by default) random direction between 0 and 360 degree | Figure 1i | Palmer (1992) |
+| nlm_mosaictess | Simulates a patchy mosaic neutral landscape model based on the tessellation of a random point process. The algorithm randomly places points (parameter germs) in the landscape, which are used as the centroid points for a voronoi tessellation. A higher number of points therefore leads to a more fragmented landscape | Figure 1k | Gaucherel (2008), Method 1 |
+| nlm_mosaicgibbs | Simulates a patchy mosaic neutral landscape model based on the tessellation of an inhibition point process. This inhibition point process starts with a given number of points and uses a minimisation approach to fit a point pattern with a given interaction parameter (0 ‐ hardcore process; 1 ‐ Poisson process) and interaction radius (distance of points/germs being apart) | Figure 1l | Gaucherel (2008), Method 2 |
+| nlm_random | Simulates a spatially random neutral landscape model with values drawn a uniform distribution | Figure 1m | With and Crist (1995) |
+| nlm_randomcluster | Simulates a random cluster nearest‐neighbour neutral landscape. The parameter ai controls for the number and abundance of land cover classes and p controls for proportion of elements randomly selected to form clusters | Figure 1n | Saura and Martínez-Millán (2000) |
+| nlm_mpd | Simulates a midpoint displacement neutral landscape model where the parameter roughness controls the level of spatial autocorrelation | Figure 1n | Peitgen and Saupe (1988) |
+| nlm_randomrectangularcluster | Simulates a random rectangular cluster neutral landscape model. The algorithm randomly distributes overlapping rectangles until the landscape is filled | Figure 1o | Gustafson and Parker (1992) |
+
+## Meta
+
+- Please [report any issues or
+  bugs](https://github.com/ropensci/NLMR/issues/new/).
+- License: GPL3
+- Get citation information for `NLMR` in R doing
+  `citation(package = 'NLMR')`
+- We are very open to contributions - if you are interested check out
+  our [Contributor
+  Guidelines](https://docs.ropensci.org/NLMR/CONTRIBUTING.md).
+  - Please note that this project is released with a [Contributor Code
+    of Conduct](https://docs.ropensci.org/NLMR/CONDUCT.md). By
+    participating in this project you agree to abide by its terms.
+
+# Package index
+
+## Neutral Landscape Models
+
+- [`nlm_curds()`](https://docs.ropensci.org/NLMR/reference/nlm_curds.md)
+  : nlm_curds
+- [`nlm_distancegradient()`](https://docs.ropensci.org/NLMR/reference/nlm_distancegradient.md)
+  : nlm_distancegradient
+- [`nlm_edgegradient()`](https://docs.ropensci.org/NLMR/reference/nlm_edgegradient.md)
+  : nlm_edgegradient
+- [`nlm_fbm()`](https://docs.ropensci.org/NLMR/reference/nlm_fbm.md) :
+  nlm_fbm
+- [`nlm_gaussianfield()`](https://docs.ropensci.org/NLMR/reference/nlm_gaussianfield.md)
+  : nlm_gaussianfield
+- [`nlm_mosaicfield()`](https://docs.ropensci.org/NLMR/reference/nlm_mosaicfield.md)
+  : nlm_mosaicfield
+- [`nlm_mosaicgibbs()`](https://docs.ropensci.org/NLMR/reference/nlm_mosaicgibbs.md)
+  : nlm_mosaicgibbs
+- [`nlm_mosaictess()`](https://docs.ropensci.org/NLMR/reference/nlm_mosaictess.md)
+  : nlm_mosaictess
+- [`nlm_mpd()`](https://docs.ropensci.org/NLMR/reference/nlm_mpd.md) :
+  nlm_mpd
+- [`nlm_neigh()`](https://docs.ropensci.org/NLMR/reference/nlm_neigh.md)
+  : nlm_neigh
+- [`nlm_percolation()`](https://docs.ropensci.org/NLMR/reference/nlm_percolation.md)
+  : nlm_percolation
+- [`nlm_planargradient()`](https://docs.ropensci.org/NLMR/reference/nlm_planargradient.md)
+  : nlm_planargradient
+- [`nlm_randomcluster()`](https://docs.ropensci.org/NLMR/reference/nlm_randomcluster.md)
+  : nlm_randomcluster
+- [`nlm_random()`](https://docs.ropensci.org/NLMR/reference/nlm_random.md)
+  : nlm_random
+- [`nlm_randomrectangularcluster()`](https://docs.ropensci.org/NLMR/reference/nlm_randomrectangularcluster.md)
+  : nlm_randomrectangularcluster
+
+## Utility functions
+
+- [`util_classify()`](https://docs.ropensci.org/NLMR/reference/util_classify.md)
+  : util_classify
+
+# Articles
+
+### All vignettes
+
+- [Basic Usage of
+  NLMR](https://docs.ropensci.org/NLMR/articles/getstarted.md):
+- [NLMR Software
+  Heritage](https://docs.ropensci.org/NLMR/articles/nlm_software_heritage.md):
+- [NLMR Overview and
+  Tips](https://docs.ropensci.org/NLMR/articles/overview_tips.md):
