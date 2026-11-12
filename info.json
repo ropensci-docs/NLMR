@@ -1,0 +1,13 @@
+{
+  "commit": {
+    "commit": "fe99dd7184eabaad21ab70fd7cb0f9910346ba09",
+    "author": "Jakub Nowosad <tupiszakaczki@gmail.com>",
+    "time": "2026-11-12T13:56:39Z",
+    "files": 1,
+    "merge": false,
+    "message": "updates codemeta\n"
+  },
+  "repo": "https://github.com/ropensci/NLMR",
+  "pkg": "NLMR",
+  "time": "2026-11-12T14:55:20Z"
+}
